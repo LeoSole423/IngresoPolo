@@ -11,32 +11,39 @@ def camera_home():
     cameras = Camera.query.filter_by(user_id=current_user.get_id()).all()
     return render_template('camera/home.html', cameras=cameras)
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, SelectField, IntegerField, PasswordField
+from wtforms.validators import DataRequired, Optional
+
+class CameraForm(FlaskForm):
+    name = StringField('Nombre', validators=[DataRequired()])
+    type = SelectField('Tipo de cámara', choices=[('ONVIF', 'ONVIF'), ('DIRECT', 'Directa (HTTP/MJPEG)')], validators=[DataRequired()])
+    ip = StringField('Dirección IP', validators=[DataRequired()])
+    port = IntegerField('Puerto', validators=[Optional()])
+    username = StringField('Usuario', validators=[Optional()])
+    password = PasswordField('Contraseña', validators=[Optional()])
+    stream_url = StringField('URL de stream HTTP/JPEG/MJPEG', validators=[Optional()])
+
 @camera_bp.route('/add', methods=['GET', 'POST'])
 @login_required
 def add_camera():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        cam_type = request.form.get('type')
-        ip = request.form.get('ip')
-        port = request.form.get('port')
-        username = request.form.get('username')
-        password = request.form.get('password')
-        stream_url = request.form.get('stream_url') if cam_type == 'DIRECT' else None
+    form = CameraForm()
+    if form.validate_on_submit():
         camera = Camera(
             user_id=current_user.get_id(),
-            name=name,
-            type=cam_type,
-            ip=ip,
-            port=port,
-            username=username,
-            password=password,
-            stream_url=stream_url
+            name=form.name.data,
+            type=form.type.data,
+            ip=form.ip.data,
+            port=form.port.data,
+            username=form.username.data,
+            password=form.password.data,
+            stream_url=form.stream_url.data if form.type.data == 'DIRECT' else None
         )
         db.session.add(camera)
         db.session.commit()
         flash('Cámara agregada correctamente', 'success')
         return redirect(url_for('camera.camera_home'))
-    return render_template('camera/add.html')
+    return render_template('camera/add.html', form=form)
 
 @camera_bp.route('/view/<int:camera_id>')
 @login_required
