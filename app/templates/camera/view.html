@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ camera.name }}</h2>
+<p><strong>Tipo:</strong> {{ camera.type }}</p>
+<p><strong>IP:</strong> {{ camera.ip }}:{{ camera.port }}</p>
+
+{% if camera.type == 'DIRECT' and camera.stream_url %}
+    <h4>Vista previa del stream HTTP/JPEG/MJPEG</h4>
+    <img src="{{ camera.stream_url }}" alt="Vista de la cámara" class="img-fluid" style="max-width: 100%; border: 1px solid #ccc;">
+    <p class="mt-2"><small>Si tu cámara soporta MJPEG, el stream se actualizará automáticamente. Si es solo JPEG, deberás refrescar la página para ver una nueva imagen.</small></p>
+{% else %}
+    <p>Funcionalidad ONVIF en desarrollo.</p>
+{% endif %}
+
+<a href="{{ url_for('camera.camera_home') }}" class="btn btn-secondary mt-3">Volver a mis cámaras</a>
+{% endblock %}

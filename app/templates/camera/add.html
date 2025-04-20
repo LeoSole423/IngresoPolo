@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Agregar nueva cámara ONVIF</h2>
-<form method="post">
+<h2>Agregar nueva cámara</h2>
+<form method="post" id="cameraForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="type" class="form-label">Tipo de cámara</label>
+        <select class="form-control" id="type" name="type" required onchange="toggleFields()">
+            <option value="ONVIF">ONVIF</option>
+            <option value="DIRECT">Directa (HTTP/MJPEG)</option>
+        </select>
+    </div>
     <div class="mb-3">
         <label for="ip" class="form-label">Dirección IP</label>
         <input type="text" class="form-control" id="ip" name="ip" required>
@@ -11,13 +22,31 @@
         <input type="number" class="form-control" id="port" name="port" value="80" required>
     </div>
     <div class="mb-3">
-        <label for="user" class="form-label">Usuario</label>
-        <input type="text" class="form-control" id="user" name="user" required>
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="username" name="username">
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <div class="mb-3" id="streamUrlDiv" style="display:none;">
+        <label for="stream_url" class="form-label">URL de stream HTTP/JPEG/MJPEG</label>
+        <input type="text" class="form-control" id="stream_url" name="stream_url" placeholder="http://ip:puerto/stream o /snapshot.jpg">
+        <small class="form-text text-muted">Ejemplo: http://192.168.1.100:8080/video</small>
     </div>
     <button type="submit" class="btn btn-success">Agregar cámara</button>
 </form>
+
+<script>
+function toggleFields() {
+    var type = document.getElementById('type').value;
+    var streamDiv = document.getElementById('streamUrlDiv');
+    if(type === 'DIRECT') {
+        streamDiv.style.display = '';
+    } else {
+        streamDiv.style.display = 'none';
+    }
+}
+document.addEventListener('DOMContentLoaded', toggleFields);
+</script>
 {% endblock %}
