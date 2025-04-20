@@ -34,6 +34,9 @@ from app import forms
 app.register_blueprint(main)
 app.register_blueprint(auth)
 
+from app.routes.camera import camera_bp
+app.register_blueprint(camera_bp)
+
 @app.before_request
 def before_request():
     session.permanent = True

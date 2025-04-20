@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mis Cámaras IP</h2>
+<p>Próximamente podrás ver y administrar tus cámaras ONVIF aquí.</p>
+<a href="{{ url_for('camera.add_camera') }}" class="btn btn-primary">Agregar nueva cámara</a>
+{% endblock %}
