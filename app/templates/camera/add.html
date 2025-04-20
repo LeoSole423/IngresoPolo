@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Agregar nueva cámara</h2>
+<h2>{% if edit_mode %}Editar cámara{% else %}Agregar nueva cámara{% endif %}</h2>
 <form method="post" id="cameraForm">
     {{ form.hidden_tag() }}
     <div class="mb-3">
@@ -32,7 +32,7 @@
         {{ form.stream_url(class_='form-control', id='stream_url', placeholder='http://ip:puerto/stream o /snapshot.jpg') }}
         <small class="form-text text-muted">Ejemplo: http://192.168.1.100:8080/video</small>
     </div>
-    <button type="submit" class="btn btn-success">Agregar cámara</button>
+    <button type="submit" class="btn btn-success">{% if edit_mode %}Guardar cambios{% else %}Agregar cámara{% endif %}</button>
 </form>
 
 <script>
