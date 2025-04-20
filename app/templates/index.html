@@ -8,8 +8,22 @@
         <h1 class="fw-bold" style="color:#1a2235; letter-spacing:1px;">Polo 52 - Sistema de Seguridad</h1>
 <p class="lead mb-4 text-muted">Control y registro automatizado de vehículos en el Parque Industrial Polo 52.</p>
         
+        
         {% if current_user.is_authenticated %}
-            <p>Bienvenido, {{ current_user.username }}.</p>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm text-center">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-video fa-3x text-primary"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Agregar nueva cámara</h5>
+                            <p class="card-text">Registra una cámara IP ONVIF o directa para monitoreo y gestión.</p>
+                            <a href="{{ url_for('camera.add_camera') }}" class="btn btn-success">Agregar cámara</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% else %}
         <!-- Banner institucional -->
         <div class="p-4 mb-4 rounded-3 position-relative overflow-hidden" style="background: linear-gradient(90deg, #1a2235 60%, #41506b 100%); background-image: url('/static/acceso_parque.jpg'); background-size: cover; background-blend-mode: multiply; min-height: 200px; display: flex; align-items: center;">
