@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="fw-bold" style="color:#1a2235; letter-spacing:1px;">Polo 52 - Sistema de Seguridad</h1>
+<p class="lead mb-4 text-muted">Control y registro automatizado de vehículos en el Parque Industrial Polo 52.</p>
+        
+        {% if current_user.is_authenticated %}
+            <p>Bienvenido, {{ current_user.username }}.</p>
+        {% else %}
+        <!-- Banner institucional -->
+        <div class="p-4 mb-4 rounded-3 position-relative overflow-hidden" style="background: linear-gradient(90deg, #1a2235 60%, #41506b 100%); background-image: url('/static/acceso_parque.jpg'); background-size: cover; background-blend-mode: multiply; min-height: 200px; display: flex; align-items: center;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(20,25,40,0.72);"></div>
+    <div class="position-relative" style="z-index:2;">
+        <h2 class="fw-bold mb-2" style="color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.28);">Bienvenido a Polo 52</h2>
+        <p class="mb-3" style="font-size:1.1rem; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.18);">Control seguro y automatizado de accesos y egresos en el Parque Industrial Polo 52.</p>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg me-2">Iniciar sesión</a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg fw-bold" style="color:#1a2235; border:2px solid #1a2235;">Registrarse</a>
+    </div>
+</div>
+        <!-- Beneficios del sistema -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 py-4 border-0 shadow-sm">
+                    <div class="mb-2"><i class="fas fa-car fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold mb-1">Registro de Vehículos</h5>
+                    <p class="text-muted mb-0">Ingreso y egreso automatizado de vehículos y personas.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 py-4 border-0 shadow-sm">
+                    <div class="mb-2"><i class="fas fa-shield-alt fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold mb-1">Seguridad Integral</h5>
+                    <p class="text-muted mb-0">Control de acceso seguro y monitoreo en tiempo real.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 py-4 border-0 shadow-sm">
+                    <div class="mb-2"><i class="fas fa-history fa-2x text-primary"></i></div>
+                    <h5 class="fw-bold mb-1">Historial Accesible</h5>
+                    <p class="text-muted mb-0">Consulta de movimientos y reportes detallados.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Mensaje institucional -->
+        <div class="d-flex justify-content-center mt-4">
+    <blockquote class="blockquote p-4 bg-white shadow-sm rounded" style="max-width:600px; width:100%; line-height:1.5; border-left:6px solid #1a2235;">
+        <p class="mb-2" style="font-size:1.15rem; color:#1a2235; font-weight:500;">"La seguridad de su empresa, nuestra prioridad en Polo 52."</p>
+        <footer class="blockquote-footer mt-2" style="color:#41506b;">Equipo de Seguridad Polo 52</footer>
+    </blockquote>
+</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
