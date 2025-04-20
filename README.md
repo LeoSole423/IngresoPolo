@@ -49,7 +49,18 @@ Mysqltest/
    ```
 
 2. **Configura las variables de entorno:**
-   - Renombra `.env.example` a `.env` y completa los valores necesarios.
+   - Copia el archivo `.env.example` y renómbralo como `.env`.
+   - Completa los valores requeridos para cada variable según tu entorno local.
+   - **No subas tu archivo `.env` al repositorio, ya que contiene información sensible.**
+
+   El archivo `.env.example` contiene un ejemplo de las variables necesarias:
+   ```env
+   MYSQL_ROOT_PASSWORD=your_mysql_root_password
+   MYSQL_DATABASE=your_database_name
+   DATABASE_URL=mysql+pymysql://root:your_mysql_root_password@db:3306/your_database_name
+   SECRET_KEY=your_secret_key
+   ```
+   Cambia estos valores en tu `.env` real según tus credenciales y entorno.
 
 3. **Instala las dependencias:**
    ```bash
