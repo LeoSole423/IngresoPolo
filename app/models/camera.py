@@ -9,7 +9,7 @@ class Camera(db.Model):
     ip = db.Column(db.String(100), nullable=False)
     port = db.Column(db.Integer, nullable=True)
     username = db.Column(db.String(100), nullable=True)
-    password = db.Column(db.String(100), nullable=True)
+    password = db.Column(db.String(255), nullable=True)
     stream_url = db.Column(db.String(255), nullable=True)  # Para cámaras directas
 
     def is_owner(self):
