@@ -1,0 +1,31 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+ENV/
+
+# Database files
+*.sqlite3
+*.db
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Others
+*.bak
+*.swp
+
+# Ignore Docker override files (optional)
+docker-compose.override.yml
+
+# Ignore example files from being accidentally tracked
+!.env.example
