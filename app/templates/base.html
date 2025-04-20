@@ -57,6 +57,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('main.index') }}">Inicio</a>
                     </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('camera.camera_home') }}">Cámaras IP</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
