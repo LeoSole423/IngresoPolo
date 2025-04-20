@@ -9,6 +9,7 @@ Aplicación web para la gestión de tareas con autenticación de usuarios, desar
 - Interfaz responsiva con Bootstrap
 - Integración con base de datos MySQL
 - Organización modular del código con Blueprints y modelos
+- Acceso a cámaras IP a través del protocolo ONVIF (en desarrollo)
 
 ## Estructura del Proyecto
 
@@ -83,6 +84,25 @@ Mysqltest/
    ```bash
    docker-compose up --build
    ```
+
+## Flujo de trabajo con ramas
+
+- `main`: Rama estable, lista para producción. Solo recibe cambios probados y listos.
+- `develop`: Rama de integración donde se desarrollan y prueban nuevas funcionalidades.
+- `feature/nombre-feature`: Para cada nueva funcionalidad, crea una rama desde `develop` y trabaja ahí. Cuando termines, haz merge a `develop`.
+
+**Ejemplo de contribución:**
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b feature/nueva-funcionalidad
+# Realiza tus cambios y haz commits
+# Cuando termines:
+git add .
+git commit -m "Describe tu cambio"
+git push origin feature/nueva-funcionalidad
+# Haz un Pull Request a develop
+```
 
 ## Uso
 
