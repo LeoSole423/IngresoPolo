@@ -29,6 +29,8 @@ class CameraForm(FlaskForm):
 def add_camera():
     form = CameraForm()
     if form.validate_on_submit():
+        from werkzeug.security import generate_password_hash
+        hashed_password = generate_password_hash(form.password.data) if form.password.data else None
         camera = Camera(
             user_id=current_user.get_id(),
             name=form.name.data,
@@ -36,7 +38,7 @@ def add_camera():
             ip=form.ip.data,
             port=form.port.data,
             username=form.username.data,
-            password=form.password.data,
+            password=hashed_password,
             stream_url=form.stream_url.data if form.type.data == 'DIRECT' else None
         )
         db.session.add(camera)
